@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "../api/axios";
-import API_URLS from "../api/constants";
+import {API_URLS} from "../api/constants";
 import { toast } from "react-toastify";
 import forgetpass1 from "../assets/forgetpass1.png";
 

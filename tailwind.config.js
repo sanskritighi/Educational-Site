@@ -3,15 +3,16 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      width:{
+        15: "3.8rem",
+      },
+      // colors:{
+      //   blue: "#2980b9",
+      // },
       backgroundImage: {
         // hero: "url('./assets/eduA.jpg')",
         // edu: "url('./assets/edulogo.png')",
-        width: {
-          15: "3.8rem",
-        },
-        colors: {
-          blue: "#2980b9",
-        },
+        'reading':"url('./assets/Readingimg.jpg')",
       },
       fontFamily:{
         montserrat:["'Montserrat'", 'sans-serif;']

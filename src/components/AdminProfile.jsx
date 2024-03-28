@@ -5,7 +5,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import axios from "../api/axios";
 import Avatar from "react-avatar";
 import { useGET } from "../hooks/useApi";
-import API_URLS from "../api/constants";
+import {API_URLS} from "../api/constants";
 
 const AdminProfile = () => {
   const { user, getUser } = useAuth();

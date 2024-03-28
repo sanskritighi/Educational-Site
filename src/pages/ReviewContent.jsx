@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useGET } from '../hooks/useApi'
-import API_URLS from '../api/constants'
+import {API_URLS} from '../api/constants';
 import { useAuth } from '../hooks/useAuth'
 import Loading from '../components/Loading'
 import { formatAPIDate } from '../utils/Dates'
@@ -31,6 +31,7 @@ const ReviewContent = () => {
 
     const [assignedTopics, setassignedTopics] = useState([])
     const [selectStatus, setSelectedStatus] = useState('REVIEW')
+    const [editorData,setEditorData]=useState([])
     const [loading, setLoading] = useState(false)
 
 
@@ -39,12 +40,16 @@ const ReviewContent = () => {
     })
     // setassignedTopics(allData)
 
+
     useEffect(() => {
         if (!isLoading && allData) {
             setassignedTopics(allData?.results);
+            setEditorData(allData?.results.map(item => ({
+                id: item.content?.id,
+                content: item.content?.data
+            })));
         }
     }, [allData, isLoading]);
-
 
     const handleStatusChange = (e) => {
         const status = e.target.value;
@@ -82,11 +87,10 @@ const ReviewContent = () => {
         }
     }
 
-    const [isrejectUpdate, setIsrejectUpdate] = useState(false)
-
     const handleUpdatePublish = (topicid) => {
         if (window.confirm('Are you sure?')) {
-            const content = editorRef.current.getContent()
+            const content = editorData.find(data => data.id === topicid)?.content || "<p></p>";
+            console.log('TopicId',topicid,content)
             axios.put(`${API_URLS.topicContents}/${topicid}/`, {
                 content: content,
                 status: 'PUBLISHED',
@@ -113,7 +117,8 @@ const ReviewContent = () => {
     const handleUpdateReject = (topicid) => {
         const message=window.prompt("Why was the content rejected ?", '')
         if (window.confirm('Are you sure?')) {
-            const content = editorRef.current.getContent()
+            const content = editorData.find(data => data.id === topicid)?.content || "<p></p>";
+            console.log('TopicId-Reject',topicid,content)
             axios.put(`${API_URLS.topicContents}/${topicid}/`, {
                 content: content,
                 status: 'REJECTED',
@@ -136,10 +141,17 @@ const ReviewContent = () => {
 
     }
 
+    const handleEditorChange = (id, newContent) => {
+        setEditorData(prevItems => {
+          return prevItems.map(item => {
+            if (item.id === id) {
+              return { ...item, content: newContent };
+            }
+            return item;
+          });
+        });
+      };
 
-    const handleReject = () => {
-        window.prompt("Why was the article rejected ?", 'Your content is not correct.')
-    }
 
     if (isLoading) {
         return <Loading />
@@ -185,7 +197,8 @@ const ReviewContent = () => {
                                         {
                                             <Editor
                                                 disabled
-                                                value={item.content.data}
+                                                value={editorData.find(data => data.id === item.content?.id)?.content || ''}
+                                                onEditorChange={(newContent, editor) => handleEditorChange(item.id, newContent)}
                                                 key={item?.id}
                                                 apiKey={apiKey}
                                                 onInit={(evt, editor) => editorRef.current = editor}

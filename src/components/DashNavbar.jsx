@@ -15,7 +15,9 @@ function DashNavbar({ sidebarOpen, toggleSidebar }) {
 
         {/* for logo */}
         <div className="w-32 h-full object-cover">
+          <a href='/'>
           <img src={Logo} className="scale-75" />
+          </a>
         </div>
         <div className='flex items-center justify-end px-2 space-x-4 md:space-x-6'>
           <NotifyBadge/>

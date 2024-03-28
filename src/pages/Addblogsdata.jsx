@@ -5,10 +5,12 @@ import { BiTrash } from 'react-icons/bi'
 import Modal from '../components/Modal';
 import { toast } from 'react-toastify';
 import axios from '../api/axios';
-import API_URLS from '../api/constants';
+import {API_URLS} from '../api/constants';
 import { useAuth } from '../hooks/useAuth';
 
 const Addblogsdata = () => {
+
+    const {user}=useAuth()
 
     const emptyFormData = {
         id: '',
@@ -63,7 +65,7 @@ const Addblogsdata = () => {
 
     const addblogs = () => {
         setIsEdit(false)
-        setFormData({ ...emptyFormData, category: selectOptions[0]?.value })
+        setFormData({ ...emptyFormData,created_by:user?.name, category: selectOptions[0]?.value })
         // setBaseCategory()
         setModalOpen(true)
 
@@ -229,16 +231,9 @@ const Addblogsdata = () => {
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                             Author  <span className="text-red-500">*</span>
                         </label>
-                        <input
-                            type="text"
-                            id="created_by"
-                            name="created_by"
-                            value={user?.name}
-                            disabled
-                            onChange={handleChange}
-                            required
-                            className="mt-1 px-3 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm disabled:bg-gray-300"
-                        />
+                        <select value={user?.name} name='created_by' className='w-full mt-1 p-2 cursor-pointer outline-gray-300 rounded bg-transparent outline outline-1'>
+                            <option defaultValue={user?.name}>{user?.name}</option>
+                        </select>
                     </div>
 
 

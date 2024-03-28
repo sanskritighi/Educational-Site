@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useGET } from '../hooks/useApi'
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
-import API_URLS from "../api/constants";
+import {API_URLS} from "../api/constants";
 
 
 

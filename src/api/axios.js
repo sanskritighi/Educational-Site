@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BACKEND_DOMAIN } from "./globals";
+import { BACKEND_DOMAIN } from "./constants";
 
 const BASE_URL=BACKEND_DOMAIN
 

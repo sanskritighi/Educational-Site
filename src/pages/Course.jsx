@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { formatAPIDate } from '../utils/Dates'
 import { Link } from 'react-router-dom'
 import { useGET } from '../hooks/useApi'
-import API_URLS from '../api/constants'
+import {API_URLS} from '../api/constants';
 import Loading from '../components/Loading'
 
 

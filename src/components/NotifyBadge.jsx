@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from '../api/axios'
-import API_URLS from '../api/constants'
+import {API_URLS} from '../api/constants'
 import { useAuth } from '../hooks/useAuth'
 import { IoMdNotifications } from "react-icons/io";
 import { formatAPIDate } from '../utils/Dates';
 import ReactTimeago from 'react-timeago';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { Link,useLocation } from 'react-router-dom';
+import {NOTIFICATION_REFRESH_INTERVAL} from '../api/constants'
+import NotificationSound from '../assets/notify.wav';
 
 const NotifyBadge = () => {
     const [notifyCount, setNotifyCount] = useState(0)
     const [notifyData, setNotifyData] = useState([])
     const [openNotifyBar,setOpenNotifyBar]=useState(false) 
     const { user } = useAuth()
+    const audioPlayer=useRef(null)
+    const location = useLocation();
 
     const getNotifications = () => {
         axios.get(API_URLS.notificationSummary, {
@@ -21,13 +24,17 @@ const NotifyBadge = () => {
             }
         }).then(resp => {
             const data = resp.data
+            const newUnreadCount = data?.unread_notifications;
+            if (newUnreadCount > notifyCount) {
+                audioPlayer.current?.play();
+            }
             setNotifyCount(data?.unread_notifications)
             setNotifyData(data?.latest_notifications)
         })
     }
 
     useEffect(() => {
-        const timer = setInterval(getNotifications, 3000);
+        const timer = setInterval(getNotifications, NOTIFICATION_REFRESH_INTERVAL);
         return () => clearInterval(timer);
     }, []);
 
@@ -45,13 +52,25 @@ const NotifyBadge = () => {
         }
     };
 
+    useEffect(() => {
+      
+        setOpenNotifyBar(false)
+      return () => {
+        
+      }
+    }, [location])
+    
+
 
     return (
         <div className="relative cursor-pointer text-gray-600">
             <div onClick={handleDropdownClick}>
                 <IoMdNotifications className='text-4xl' />
                 {notifyCount > 0 && (
+                    <>
                     <span className="absolute top-0 right-0 inline-block bg-red-500 text-white rounded-full px-1 py-0 text-xs">{notifyCount}</span>
+                    <audio ref={audioPlayer} src={NotificationSound} />
+                    </>
                 )}
             </div>
             {/* Dropdown content */}
@@ -67,8 +86,15 @@ const NotifyBadge = () => {
                             <ReactTimeago  date={notification.created_at}/>
                         </div>
                     ))}
-                    <div className='w-full h-1 bg-gray-500 my-2'/>
-                    <Link to='/notifications' className='px-3 py-2 w-full outline outline-1 rounded'>See All</Link>
+                    {
+                        notifyData.length > 0 &&
+                        <>
+                        <div className='w-full h-1 bg-gray-500 my-2'/>
+                        <div className='px-1 py-2 w-full flex justify-center text-center'>
+                        <Link to='/notifications' className='px-3 py-2 w-full outline outline-1 rounded'>See All</Link>
+                        </div>
+                        </>
+                    }
                 </div>
             )}
         </div>

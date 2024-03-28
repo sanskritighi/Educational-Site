@@ -1,7 +1,12 @@
+const BACKEND_DOMAIN="http://localhost:8000/"
+const NOTIFICATION_REFRESH_INTERVAL=2500
+
+
 const API_URLS = {
     notifications:'notifications',
     notificationSummary:'notification-summary/',
     notificationMarkAll:'notifications-markall/',
+    notificationsDelete:'notifications-deleteread/',
     listTeachers:'all-teachers',
     viewBlogs: 'view_blogs',
     createBlogs: 'create_blogs',
@@ -50,47 +55,5 @@ const API_URLS = {
 
   };
 
-  const _API_URLS = {
-    viewBlogs: 'view_blogs',
-    createBlogs: 'create_blogs/',
-    viewResources: 'view_resources/',
-    updateResources: 'update_resources/',
-    deleteResources: 'delete_resources/',
-    searchBlogs: 'search_blogs/',
-    searchCategorys: 'search_categorys/',
-    createCategorys: 'category_creates/',
-    viewCategorys: 'category_view/',
-    updateCategorys: 'category_update/<int:pk>/',
-    deleteCategorys: 'category_delete/<int:pk>/',
-    createSubjects: 'subject_create/',
-    viewSubjects: 'subject_view/',
-    updateSubjects: 'subject_update/<int:pk>/',
-    deleteSubjects: 'subject_delete/<int:pk>/',
-    createTopics: 'topic_create/',
-    viewTopics: 'topic_view/',
-    updateTopics: 'topic_update/<int:pk>/',
-    deleteTopics: 'topic_delete/<int:pk>/',
-    createSubtopics: 'subtopic_create/',
-    viewSubtopics: 'subtopic_view/',
-    updateSubtopics: 'subtopic_update/<int:pk>/',
-    deleteSubtopics: 'subtopic_delete/<int:pk>/',
-    createSyllabus: 'syllabus_create/',
-    viewSyllabus: 'syllabus_view/',
-    updateSyllabus: 'syllabus_update/<int:pk>/',
-    deleteSyllabus: 'syllabus_delete/<int:pk>/',
-    viewFiles: 'view_files/',
-    createFiles: 'create_files/',
-    updateFiles: 'update_files/',
-    deleteFiles: 'delete_files/',
-    register: 'register/',
-    userLogin: 'login/',
-    userProfile: 'profile/',
-    changePassword: 'changepassword/',
-    sendResetPasswordEmail: 'send_reset_password_email/',
-    userPasswordReset: 'user_password_reset/',
-    swagger: 'swagger/',
-    media: '^media/(?P<path>.*)$',
-};
-
   
-export default API_URLS;
+export  {API_URLS,NOTIFICATION_REFRESH_INTERVAL,BACKEND_DOMAIN};

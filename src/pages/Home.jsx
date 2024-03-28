@@ -14,24 +14,24 @@ import { MdEmail } from "react-icons/md";
 const Home = () => {
   return (
     <>
-      <div className=" bg-opacity-40 ">
-        <div className="xl:max-w-7xl w-full mx-auto text-center">
-          <div className="relative">
-            <img
+      <div className="w-full bg-opacity-40 ">
+        <div className="w-full mx-auto text-center">
+          <div className='w-full bg-blend-overlay bg-gray-800 bg-reading bg-cover bg-center min-h-screen bg-opacity-80 flex justify-center items-center'>
+            {/* <img
               src={Readingimg}
               className="w-full bg-cover bg-center"
               style={{ opacity: 0.8 }}
               alt="Reading"
-            />
+            /> */}
             <div className="content-overlay"></div>
-            <div className="content absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-20">
+            <div className="content  z-20">
               <h2 className="text-2xl lg:text-3xl xl:text-4xl text-white">
                 Find the Right Online Course for You!
               </h2>
               <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-white mt-8">
                 "Best Learning Opportunities".
               </h1>
-              <p className="text-xl lg:text-2xl xl:text-3xl text-white mt-8">
+              <p className="text-xl w-full md:w-auto lg:text-2xl xl:text-3xl text-white mt-8">
                 Our goal is to make online education work for everyone.
               </p>
               <div className="mt-8 px-12">

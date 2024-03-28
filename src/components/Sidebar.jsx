@@ -12,7 +12,7 @@ import { MdOutlineAddCard,MdOutlineFormatListNumbered,MdOutlinePlayLesson   } fr
 import { BsDatabaseGear } from "react-icons/bs";
 import { FaChalkboardTeacher,FaUserGraduate  } from "react-icons/fa";
 import { FcAdvertising } from "react-icons/fc";
-import { MdWorkspaces } from "react-icons/md";
+import { MdWorkspaces,MdNotifications } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useAuth } from '../hooks/useAuth';
 
@@ -131,6 +131,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
             ]
         },
         { name: "Messages", link: "/messages", icon: RiMessage2Line, allowedRoles: ['ADMIN'] },
+        { name: "Notifications", link: "/notifications", icon: MdNotifications , allowedRoles: ['*'] },
     ];
     
     const {user}=useAuth()

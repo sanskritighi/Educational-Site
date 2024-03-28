@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useState ,useEffect} from "react";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 
@@ -13,6 +13,8 @@ export default function LoginModal({ isOpen, setIsOpen }) {
   function openModal() {
     setIsOpen(true);
   }
+
+  
 
   return (
     <>

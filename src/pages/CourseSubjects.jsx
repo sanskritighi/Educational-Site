@@ -2,8 +2,9 @@ import React,{useState,useEffect} from 'react'
 import { formatAPIDate } from '../utils/Dates'
 import { Link, useParams } from 'react-router-dom'
 import { useGET } from '../hooks/useApi'
-import API_URLS from '../api/constants'
+import {API_URLS} from '../api/constants';
 import Loading from '../components/Loading'
+import { useAuth } from '../hooks/useAuth';
 
 function CourseSubjects() {
 
@@ -11,8 +12,9 @@ function CourseSubjects() {
   const [currentPage, setCurrentPage] = useState(1);
   const [subjects, setSubjects] = useState([]);
   const { isLoading, data, isError } = useGET(`${API_URLS.viewSubjects}?category=${courseid}&page=${currentPage}`)
+  const {user}=useAuth()
 
-
+  const BASE_COURSE_LINK=user ? 'course':'all-courses'
   const handleLoadMore = () => {
     if (data?.next) {
       setCurrentPage(prevPage => prevPage + 1);
@@ -39,7 +41,7 @@ function CourseSubjects() {
     <>
       <div className='w-full h-full max-h-full flex flex-col items-center p-4 gap-2 overflow-y-scroll'>
         <h2 className='p-3 text-left w-full text-lg font-semibold text-blue-600 flex gap-2'>
-          <Link to='/course'>Courses</Link>/<Link to={data?.[0]?.category} >{data?.[0]?.category_name}</Link>
+          <Link to={`/${BASE_COURSE_LINK}`}>Courses</Link>/<Link to={`/${BASE_COURSE_LINK}/${courseid}`} >{data?.results?.[0]?.category_name}</Link>
         </h2>
         <div className='flex flex-wrap w-full gap-4 items-center rounded min-w-md p-4'>
           {
@@ -68,7 +70,7 @@ function CourseSubjects() {
           }
         </div>
         <>
-          {data?.next && (
+          {(data?.next ) && (
             <div className='flex justify-center'>
               <button onClick={handleLoadMore} className='px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600'>
                 Load More

@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { useGET } from '../hooks/useApi';
-import API_URLS from '../api/constants';
+import {API_URLS} from '../api/constants';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { formatAPIDate } from '../utils/Dates';
 import axios from '../api/axios';

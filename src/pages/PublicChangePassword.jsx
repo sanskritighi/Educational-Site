@@ -3,7 +3,7 @@ import { useNavigate,useParams} from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import axios from '../api/axios';
-import API_URLS from '../api/constants';
+import {API_URLS} from '../api/constants';
 
 function PublicChangePassword() {
 

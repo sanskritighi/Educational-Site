@@ -7,7 +7,7 @@ import Modal from '../components/Modal';
 import { toast } from 'react-toastify';
 import axios from '../api/axios';
 import { Link } from 'react-router-dom';
-import API_URLS from '../api/constants';
+import {API_URLS} from '../api/constants';
 
 const Messages = () => {
     const emptyFormData = {

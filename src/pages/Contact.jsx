@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from '../api/axios';
 import { toast } from 'react-toastify';
-import API_URLS from '../api/constants'
+import {API_URLS} from '../api/constants';
 
 const Contact = () => {
   const [formData, setFormData] = useState({

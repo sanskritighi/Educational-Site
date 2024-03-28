@@ -8,7 +8,7 @@ import { BiPencil, BiTrash } from 'react-icons/bi'
 import { toast } from 'react-toastify';
 import axios from '../api/axios';
 import { Link } from 'react-router-dom';
-import API_URLS from '../api/constants';
+import {API_URLS} from '../api/constants';
 import Loading from '../components/Loading';
 
 

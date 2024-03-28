@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { Link, NavLink,useLocation } from "react-router-dom";
 import Logo from "../assets/Edulogoo.png";
 import { BiMenu } from "react-icons/bi";
 import { GrClose } from "react-icons/gr"
@@ -13,8 +13,9 @@ const Navbar = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [mobilenavOpen, setmobilenavOpen] = useState(false)
   const { checkLoggedIn, user } = useAuth()
+  const location=useLocation()
 
-  console.log(checkLoggedIn())
+
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
@@ -27,6 +28,15 @@ const Navbar = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  useEffect(() => {
+    closeModal()
+  
+    return () => {
+      
+    }
+  }, [location])
+  
 
 
 
@@ -89,7 +99,7 @@ const Navbar = () => {
                 <NavLink to='/blogs' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Blogs</NavLink>
               </li>
               <li className="block px-3 py-2 rounded">
-                <NavLink to='/course2' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Course2</NavLink>
+                <NavLink to='/course2' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Course</NavLink>
               </li>
               <li className="block px-3 py-2 rounded">
                 <NavLink to='/contact' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Contact</NavLink>

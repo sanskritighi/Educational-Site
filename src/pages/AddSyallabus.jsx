@@ -3,7 +3,7 @@ import { MdNoteAdd } from "react-icons/md";
 import { useGET } from '../hooks/useApi';
 import axios from '../api/axios';
 import Modal from '../components/Modal';
-import API_URLS from '../api/constants';
+import {API_URLS} from '../api/constants';
 import { BsUpload } from 'react-icons/bs'
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -56,8 +56,8 @@ const AddSyllabus = () => {
 
 
   useEffect(() => {
-    axios.get(API_URLS.viewCategorys).then(resp => {
-      const data = resp?.data?.map(item => ({ label: item.name, value: item.id }))
+    axios.get(`${API_URLS.viewCategorys}?&page_size=500`).then(resp => {
+      const data = resp?.data?.results?.map(item => ({ label: item.name, value: item.id }))
       setCategoryOptions(data)
     })
     return () => {
@@ -65,8 +65,8 @@ const AddSyllabus = () => {
   }, [])
 
   useEffect(() => {
-    axios.get(`${API_URLS.viewSubjects}?category=${selectedCategory}`).then(resp => {
-      const data = resp?.data?.map(item => ({ label: item.name, value: item.id }))
+    axios.get(`${API_URLS.viewSubjects}?category=${selectedCategory}&page_size=500`).then(resp => {
+      const data = resp?.data?.results?.map(item => ({ label: item.name, value: item.id }))
       setsubjectOptions(data)
     })
     return () => {
